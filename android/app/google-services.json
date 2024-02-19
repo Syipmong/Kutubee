@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "358724351489",
+    "project_id": "mybooksapp-kutubee",
+    "storage_bucket": "mybooksapp-kutubee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358724351489:android:aede3487eaab8478f0b200",
+        "android_client_info": {
+          "package_name": "com.example.kutubee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDagEJn3K9_-gRT0Tl9O1GbPSKrIHWM5V4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
