@@ -5,6 +5,7 @@ import 'package:kutubee/screens/authentication.dart';
 import 'package:kutubee/screens/email_password_login_screen.dart';
 import 'package:kutubee/screens/homescreen.dart';
 import 'package:kutubee/firebase_options.dart';
+import 'package:kutubee/screens/profilescreen.dart';
 import 'package:provider/provider.dart';
 import 'screens/createaccount.dart';
 import 'screens/forgotpassword.dart';
@@ -36,6 +37,7 @@ class MyBooksApp extends StatelessWidget {
           '/forgot_password': (context) => ForgotPasswordScreen(),
           '/email_password_login': (context) => EmailPasswordLoginScreen(),
           '/home': (context) => HomeScreen(),
+          '/profile': (context) => ProfileSetupScreen()
         },
       ),
     );

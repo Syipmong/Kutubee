@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
 
 class TrendingStories extends StatelessWidget {
-  const TrendingStories({super.key});
+   TrendingStories({Key? key}) : super(key: key);
+
+
+  final List<String> trendingTitles = [
+    'Story 1',
+    'Story 2',
+    'Story 3',
+    'Story 4',
+    'Story 5',
+  ];
+
+  final List<String> trendingDescriptions = [
+    'Description of Story 1',
+    'Description of Story 2',
+    'Description of Story 3',
+    'Description of Story 4',
+    'Description of Story 5',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // Replace this with actual data or a placeholder widget
     return ListView.builder(
-      itemCount: 5, // Replace with the actual number of trending stories
+      itemCount: trendingTitles.length,
       itemBuilder: (context, index) {
-        // Return a widget for each trending story
         return ListTile(
-          title: Text('Trending Story $index'), // Placeholder text
-          subtitle: Text('Description of Trending Story $index'), // Placeholder text
+          title: Text(trendingTitles[index]),
+          subtitle: Text(trendingDescriptions[index]),
         );
       },
     );

@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:kutubee/screens/populacategories.dart';
 import 'package:kutubee/screens/profilescreen.dart';
+import 'package:kutubee/screens/recommendedbooks.dart';
+import 'trendingstories.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser?.email;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome to MyBooks'),
+        // title: Text(user ?? 'Guest', style: TextStyle(
+        //   fontSize: 15,
+        //   color: Colors.blueAccent
+        //
+        // ),
+        // ),
+        title: Text('e-library', style: GoogleFonts.roboto(),),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -21,7 +32,10 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.account_circle),
             onPressed: () {
               // Handle account action
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfileSetupScreen()));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileSetupScreen()),
+              );
             },
           ),
           IconButton(
@@ -32,11 +46,10 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Recommended Books Section
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20.0),
               child: Column(
@@ -45,18 +58,21 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
-                      'Recommended Books',
+                      'Recommended Stories',
                       style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  // Horizontal list of recommended books
-                  // Implement a widget for recommended books
+                  SizedBox(
+                    height: 200,
+                    child: RecommendedBooks(),
+                  ),
                 ],
               ),
             ),
 
-            // Popular Categories Section
+
+            // Popular Categories Section with dummy data
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20.0),
               child: Column(
@@ -70,13 +86,17 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  // Grid or list of popular categories
-                  // Implement a widget for popular categories
+                  // Ensure PopularCategories widget has a bounded height
+                  SizedBox(
+                    height: 200, // Set a fixed height or use Expanded
+                    child: PopularCategories(),
+                  ),
                 ],
               ),
             ),
 
-            // Trending Stories Section
+
+            // Trending Stories Section with dummy data
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20.0),
               child: Column(
@@ -90,8 +110,11 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  // Vertical list of trending stories
-                  // Implement a widget for trending stories
+                  // Ensure TrendingStories widget has a bounded height
+                  SizedBox(
+                    height: 200, // Set a fixed height or use Expanded
+                    child: TrendingStories(),
+                  ),
                 ],
               ),
             ),
@@ -102,14 +125,13 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-
 void _signOut(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      Navigator.of(context).pushReplacementNamed('/auth');
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error Signing Out '))
-      );
-    }
+  try {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacementNamed('/auth');
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error Signing Out ')),
+    );
   }
+}
