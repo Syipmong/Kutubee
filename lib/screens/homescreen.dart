@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
         //
         // ),
         // ),
-        title: Text('e-library', style: GoogleFonts.roboto(),),
+        title: Text('Kutubee', style: GoogleFonts.roboto(),),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
