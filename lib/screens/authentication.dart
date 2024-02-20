@@ -10,13 +10,12 @@ class AuthenticationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MyBooks Authentication'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FlutterLogo(
+            const FlutterLogo(
               size: 100, // Adjust the size as needed
             ),
             const SizedBox(height: 40),
@@ -24,14 +23,14 @@ class AuthenticationScreen extends StatelessWidget {
               onPressed: () {
                 _signInWithGoogle(context);
               },
-              icon: FaIcon(FontAwesomeIcons.google, color: Colors.red,),
-              label: Text('Sign in with Google'),
+              icon: const FaIcon(FontAwesomeIcons.google, color: Colors.red,),
+              label: const Text('Sign in with Google'),
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                textStyle: TextStyle(fontSize: 18),
+                textStyle: const TextStyle(fontSize: 18),
               ),
             ),
             const SizedBox(height: 20),
@@ -39,14 +38,14 @@ class AuthenticationScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pushNamed('/email_password_login');
               },
-              icon: Icon(Icons.email),
-              label: Text('Sign in with Email/Password'),
+              icon: const Icon(Icons.email),
+              label: const Text('Sign in with Email/Password'),
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                textStyle: TextStyle(fontSize: 18),
+                textStyle: const TextStyle(fontSize: 18),
               ),
             ),
           ],

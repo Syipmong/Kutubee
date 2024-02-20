@@ -1,97 +1,113 @@
-// home_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:kutubee/screens/browsebookscreen.dart';
-
+import 'package:kutubee/screens/profilescreen.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome to MyBooks',),
+        title: const Text('Welcome to MyBooks'),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              // Handle search action
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.account_circle),
+            onPressed: () {
+              // Handle account action
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfileSetupScreen()));
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
             onPressed: () {
               _signOut(context);
             },
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // Recommended Books Section
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
+                      'Recommended Books',
+                      style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  // Horizontal list of recommended books
+                  // Implement a widget for recommended books
+                ],
+              ),
+            ),
 
-            // Add more widgets as needed
+            // Popular Categories Section
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
+                      'Popular Categories',
+                      style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  // Grid or list of popular categories
+                  // Implement a widget for popular categories
+                ],
+              ),
+            ),
+
+            // Trending Stories Section
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Text(
+                      'Trending Stories',
+                      style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  // Vertical list of trending stories
+                  // Implement a widget for trending stories
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildUserInfo() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Welcome back, ${FirebaseAuth.instance.currentUser!.displayName}!',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          // Add user profile image, name, and other details here
-          // You can use CircleAvatar or similar widgets for the profile image
-        ],
-      ),
-    );
-  }
 
-  Widget _buildUserPosts() {
-    // Placeholder for user's posts
-    return Container(
-      color: Colors.grey[200],
-      padding: EdgeInsets.symmetric(vertical: 16),
-      child: Column(
-        children: [
-          Text(
-            'Your Posts',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          // Add user's posts here
-          // You can use ListTile or similar widgets to display each post
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFeeds() {
-    // Placeholder for feeds
-    return Container(
-      color: Colors.grey[300],
-      padding: EdgeInsets.symmetric(vertical: 16),
-      child: Column(
-        children: [
-          Text(
-            'Feeds',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          // Add feeds here
-          // You can use ListTile or similar widgets to display each feed item
-        ],
-      ),
-    );
-  }
-
-  void _signOut(BuildContext context) async {
+void _signOut(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signOut();
       Navigator.of(context).pushReplacementNamed('/auth');
     } catch (e) {
-      print('Error signing out: $e');
+
     }
   }
-}

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileSetupScreen extends StatefulWidget {
+  const ProfileSetupScreen({super.key});
+
   @override
   _ProfileSetupScreenState createState() => _ProfileSetupScreenState();
 }
@@ -17,7 +19,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Setup'),
+        title: const Text('Profile Setup'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -30,29 +32,29 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                 child: CircleAvatar(
                   radius: 50,
                   backgroundImage: _image != null ? FileImage(_image!) : null,
-                  child: _image == null ? Icon(Icons.person, size: 50) : null,
+                  child: _image == null ? const Icon(Icons.person, size: 50) : null,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: ageController,
-                decoration: InputDecoration(labelText: 'Age'),
+                decoration: const InputDecoration(labelText: 'Age'),
                 keyboardType: TextInputType.number,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: interestsController,
-                decoration: InputDecoration(labelText: 'Interests'),
+                decoration: const InputDecoration(labelText: 'Interests'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveProfileData,
-                child: Text('Save Profile'),
+                child: const Text('Save Profile'),
               ),
             ],
           ),

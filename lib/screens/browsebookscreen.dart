@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BrowseBooksScreen extends StatelessWidget {
+  const BrowseBooksScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Browse Books'),
+        title: const Text('Browse Books'),
       ),
       body: BookList(),
     );
@@ -20,7 +22,7 @@ class BookList extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('books').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));

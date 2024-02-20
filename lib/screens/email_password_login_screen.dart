@@ -22,7 +22,7 @@ class EmailPasswordLoginScreen extends StatelessWidget {
               width: double.infinity,
               child: TextFormField(
                 controller: emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
@@ -33,7 +33,7 @@ class EmailPasswordLoginScreen extends StatelessWidget {
               width: double.infinity,
               child: TextFormField(
                 controller: passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
                 ),
