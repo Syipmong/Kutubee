@@ -108,6 +108,8 @@ void _signOut(BuildContext context) async {
       await FirebaseAuth.instance.signOut();
       Navigator.of(context).pushReplacementNamed('/auth');
     } catch (e) {
-
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error Signing Out '))
+      );
     }
   }

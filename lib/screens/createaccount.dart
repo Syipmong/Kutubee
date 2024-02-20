@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -87,21 +86,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
 
   Future<void> _selectImage() async {
-    try {
-      final PermissionStatus status = await Permission.photos.request();
-      if (status.isGranted) {
-        final picker = ImagePicker();
-        final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-        if (pickedFile != null) {
-          setState(() {
-            _image = File(pickedFile.path);
-          });
-        }
-      } else {
-        await openAppSettings();
-      }
-    } catch (e) {
-      print('Permission request error: $e');
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _image = File(image.path);
+      });
     }
   }
 
@@ -133,20 +123,28 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         'interests': interests,
       });
 
-      if (_image != null) {
-        final Reference storageRef = FirebaseStorage.instance
-            .ref()
-            .child('profile_images')
-            .child(email + '.jpg');
-        await storageRef.putFile(_image!);
-      }
+        try {
+          if (_image != null) {
+            final Reference storageRef = FirebaseStorage.instance
+                .ref()
+                .child('profile_images')
+                .child(email + '.jpg');
+            await storageRef.putFile(_image!);
+          }
+        }catch(e){
+          print('Error creating account: $e'); // Print the error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to create account. Please try again.'),
+            ),
+          );
+        }
 
       Provider.of<UserProvider>(context, listen: false).setUserName(name);
 
       // Navigate to home screen after successful account creation
       Navigator.of(context).pushReplacementNamed('/home');
     } catch (e) {
-      print('Create Account Error: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Failed to create account. Please try again.'),
