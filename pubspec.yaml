@@ -46,6 +46,7 @@ dependencies:
   permission_handler: ^11.3.0
   flutter_launcher_icons: ^0.13.1
   google_fonts: ^4.0.4
+  dot_navigation_bar: ^1.0.2
 
 dev_dependencies:
   flutter_test:
