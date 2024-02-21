@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AllBooks extends StatelessWidget {
-  const AllBooks({Key? key});
+class AllBookView extends StatelessWidget {
+  const AllBookView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class AllBooks extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('books').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
@@ -22,7 +22,7 @@ class AllBooks extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 16.0,
             crossAxisSpacing: 16.0,
-            childAspectRatio: 0.75,
+            childAspectRatio: 0.7, // Adjusted aspect ratio for better layout
           ),
           itemCount: books.length,
           itemBuilder: (context, index) {
@@ -32,41 +32,45 @@ class AllBooks extends StatelessWidget {
                 // Implement onTap functionality if needed
               },
               child: Card(
+                elevation: 3,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                elevation: 3,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
-                      child: Image.network(
-                        book['imageUrl'], // Use the image URL from Firestore
-                        fit: BoxFit.cover,
-                        height: 120.0,
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(15.0)),
+                        child: Image.network(
+                          book['imageUrl'], // Use the image URL from Firestore
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                       child: Text(
                         book['title'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,
+                        maxLines: 2, // Limit to 2 lines for title
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                       child: Text(
                         'Author: ${book['author']}',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
+                        style: const TextStyle(
+                          fontSize: 14.0,
                         ),
                         textAlign: TextAlign.center,
+                        maxLines: 1, // Limit to 1 line for author
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],

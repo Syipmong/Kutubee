@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kutubee/screens/admin.dart';
+import 'package:kutubee/screens/bottomnavigation.dart';
 import 'package:kutubee/screens/populacategories.dart';
 import 'package:kutubee/screens/recommendedbooks.dart';
 import 'package:kutubee/screens/search.dart';
@@ -125,13 +126,14 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 10.0),
                 SizedBox(
                   height: 600, // Set a fixed height or use Expanded
-                  child: AllBooks(),
+                  child: AllBookView(),
                 ),
               ],
             ),
           ),
         ],
       ),
+      // bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
