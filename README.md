@@ -2,7 +2,7 @@
 
 ## Screenshots
 
-<img src="assets/screenshots/Screenshot_20240222_050256.png" alt="Screenshot 3" width="400"/>  <img src="assets/screenshots/Screenshot_20240222_050256.png" alt="Screenshot 3" width="400"/>
+<img src="assets/screenshots/Screenshot_20240222_050256.png" alt="Screenshot 3" width="400"/>  <img src="assets/screenshots/screenshot4.png" alt="Screenshot 4" width="400"/>
 <img src="assets/screenshots/screenshot1.png" alt="Screenshot 1" width="400"/> <img src="assets/screenshots/screenshot1.png" alt="Screenshot 2" width="400"/>
 <img src="assets/screenshots/Screenshot2.png" alt="Screenshot 3" width="400"/> <img src="assets/screenshots/Screenshot2.png" alt="Screenshot 3" width="400"/>
 
