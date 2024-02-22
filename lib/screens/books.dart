@@ -36,6 +36,7 @@ class AllBookView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
+
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

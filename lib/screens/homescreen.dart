@@ -4,13 +4,32 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kutubee/screens/admin.dart';
 import 'package:kutubee/screens/bottomnavigation.dart';
 import 'package:kutubee/screens/populacategories.dart';
+import 'package:kutubee/screens/profilescreen.dart';
 import 'package:kutubee/screens/recommendedbooks.dart';
 import 'package:kutubee/screens/search.dart';
 import 'books.dart';
 import 'trendingstories.dart';
 
-class HomeScreen extends StatelessWidget {
+
+
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +152,28 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      // bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: [
+          SalomonBottomBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.search),
+            title: Text('Search'),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.favorite),
+            title: Text('Favorites'),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Profile'),
+          ),
+        ],
+      ),
     );
   }
 }

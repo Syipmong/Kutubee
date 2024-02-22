@@ -15,9 +15,7 @@ class AuthenticationScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const FlutterLogo(
-              size: 100, // Adjust the size as needed
-            ),
+            Image.asset('assets/launcher/android.png', height: 150),
             const SizedBox(height: 40),
             ElevatedButton.icon(
               onPressed: () {
