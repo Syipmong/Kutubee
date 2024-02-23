@@ -119,8 +119,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       // Save additional user data to Firestore
       await FirebaseFirestore.instance.collection('users').doc(email).set({
         'name': name,
+        'email': email,
+        'id': userCredential.user!.uid,
         'age': age,
         'interests': interests,
+        'profile_image': 'profile_images/$email.jpg',
       });
 
         try {

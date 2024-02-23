@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,6 +34,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // lets get some data from our firestore
+    final user = FirebaseAuth.instance.currentUser?.email;
+  // geting a user document from a collection in firestore
+    final user_icon = FirebaseFirestore.instance
+        .collection('users').doc(FirebaseAuth.instance.currentUser!.email).get();
+    // switch(_selectedIndex){
+    //   case 0:
+    //     Navigator.pushNamed(context, '/popular');
+    //     break;
+    //   case 1:
+    //     Navigator.pushNamed(context, '/search');
+    //     break;
+    //   case 2:
+    //     Navigator.pushNamed(context, '/allbooks');
+    //     break;
+    //   case 3:
+    //     Navigator.pushNamed(context, '/profile');
+    //     break;
+    // }
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -42,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.search,),
             onPressed: () {
               Navigator.push(
                 context,
@@ -51,12 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.account_circle),
+            //we will get the user profile image from firebase storage saved in firestore as a photo_url
+            icon:  const Icon(Icons.account_circle),
             onPressed: () {
               // Handle account action
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AdminScreen()),
+                MaterialPageRoute(builder: (context) => const ProfileSetupScreen()),
               );
             },
           ),
@@ -157,20 +178,20 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onItemTapped,
         items: [
           SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
+            icon: const Icon(Icons.home),
+            title: const Text('Home'),
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text('Search'),
+            icon: const Icon(Icons.search),
+            title: const Text('Search'),
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text('Favorites'),
+            icon: const Icon(Icons.favorite),
+            title: const Text('Favorites'),
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile'),
+            icon: const Icon(Icons.person),
+            title: const Text('Profile'),
           ),
         ],
       ),

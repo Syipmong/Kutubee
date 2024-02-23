@@ -182,6 +182,7 @@ class SalomonBottomBarItem {
   /// The color to display when this tab is not selected.
   final Color? unselectedColor;
 
+
   SalomonBottomBarItem({
     required this.icon,
     required this.title,

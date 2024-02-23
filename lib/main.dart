@@ -5,7 +5,10 @@ import 'package:kutubee/screens/authentication.dart';
 import 'package:kutubee/screens/email_password_login_screen.dart';
 import 'package:kutubee/screens/homescreen.dart';
 import 'package:kutubee/firebase_options.dart';
+import 'package:kutubee/screens/populacategories.dart';
 import 'package:kutubee/screens/profilescreen.dart';
+import 'package:kutubee/screens/search.dart';
+import 'package:kutubee/screens/viewbooksadmin.dart';
 import 'package:provider/provider.dart';
 import 'screens/createaccount.dart';
 import 'screens/forgotpassword.dart';
@@ -32,12 +35,15 @@ class MyBooksApp extends StatelessWidget {
         ),
         home: _handleAuth(), // Use _handleAuth for initial route
         routes: {
-          '/auth': (context) => AuthenticationScreen(),
-          '/create_account': (context) => CreateAccountScreen(),
+          '/auth': (context) => const AuthenticationScreen(),
+          '/create_account': (context) => const CreateAccountScreen(),
           '/forgot_password': (context) => ForgotPasswordScreen(),
           '/email_password_login': (context) => EmailPasswordLoginScreen(),
-          '/home': (context) => HomeScreen(),
-          '/profile': (context) => ProfileSetupScreen()
+          '/home': (context) => const HomeScreen(),
+          '/profile': (context) => const ProfileSetupScreen(),
+          '/search': (context) => const SearchScreen(),
+          '/allbooks': (context) => const AllBooks(),
+          '/popular': (context) => const PopularCategories()
         },
       ),
     );
@@ -48,7 +54,7 @@ class MyBooksApp extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
@@ -56,10 +62,10 @@ class MyBooksApp extends StatelessWidget {
         } else {
           if (snapshot.hasData) {
             // User is signed in
-            return HomeScreen();
+            return const HomeScreen();
           } else {
             // User is not signed in
-            return AuthenticationScreen();
+            return const AuthenticationScreen();
           }
         }
       },
