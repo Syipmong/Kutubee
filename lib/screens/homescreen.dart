@@ -74,7 +74,6 @@ class _HomeScreenState extends State<HomeScreen> {
             //we will get the user profile image from firebase storage saved in firestore as a photo_url
             icon:  const Icon(Icons.account_circle),
             onPressed: () {
-              // Handle account action
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ProfileSetupScreen()),
