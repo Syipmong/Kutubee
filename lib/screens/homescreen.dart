@@ -72,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           IconButton(
             //we will get the user profile image from firebase storage saved in firestore as a photo_url
+            // and use it as icons
             icon:  const Icon(Icons.account_circle),
             onPressed: () {
               Navigator.push(
