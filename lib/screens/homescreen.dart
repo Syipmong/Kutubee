@@ -22,21 +22,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  // int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
 
 
 
   @override
   Widget build(BuildContext context) {
-    // lets get some data from our firestore
     final user = FirebaseAuth.instance.currentUser?.email;
-  // geting a user document from a collection in firestore
     final user_icon = FirebaseFirestore.instance
         .collection('users').doc(FirebaseAuth.instance.currentUser!.email).get();
     // switch(_selectedIndex){
@@ -174,8 +172,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: SalomonBottomBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        // currentIndex: _selectedIndex,
+        // onTap: _onItemTapped,
         items: [
           SalomonBottomBarItem(
             icon: const Icon(Icons.home),

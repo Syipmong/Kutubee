@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kutubee/screens/book_details.dart'; // Import the book details screen
 
 class AllBookView extends StatelessWidget {
-  const AllBookView({super.key});
+  const AllBookView({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('books').snapshots(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -22,21 +23,31 @@ class AllBookView extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisSpacing: 16.0,
             crossAxisSpacing: 16.0,
-            childAspectRatio: 0.7, // Adjusted aspect ratio for better layout
+            childAspectRatio: 0.7,
           ),
           itemCount: books.length,
           itemBuilder: (context, index) {
             final book = books[index].data() as Map<String, dynamic>;
             return GestureDetector(
               onTap: () {
-                // Implement onTap functionality if needed
+                // Navigate to book details screen when tapped
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookDetailsScreen(
+                      imageUrl: book['imageUrl'],
+                      title: book['title'],
+                      author: book['author'],
+                      description: book['description'],
+                    ),
+                  ),
+                );
               },
               child: Card(
                 elevation: 3,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -44,7 +55,7 @@ class AllBookView extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: const BorderRadius.vertical(top: Radius.circular(15.0)),
                         child: Image.network(
-                          book['imageUrl'], // Use the image URL from Firestore
+                          book['imageUrl'],
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -58,7 +69,7 @@ class AllBookView extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,
-                        maxLines: 2, // Limit to 2 lines for title
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -70,7 +81,7 @@ class AllBookView extends StatelessWidget {
                           fontSize: 14.0,
                         ),
                         textAlign: TextAlign.center,
-                        maxLines: 1, // Limit to 1 line for author
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
