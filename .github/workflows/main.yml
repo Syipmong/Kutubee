@@ -1,0 +1,68 @@
+name: Flutter Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.8'
+          channel: 'stable'
+
+      - name: Flutter Clean
+        run: flutter clean
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      # Build APK
+      - name: Build APK
+        run: flutter build apk
+
+      - name: Build App Bundle
+        run: flutter build appbundle
+
+      # Generate Release Body
+      - name: Generate Release Body
+        id: generate_release_body
+        run: |
+          chmod +x generate_release_body.sh
+          ./generate_release_body.sh > release_body.txt
+
+      # Create directory for release files
+      - name: Create Release Files Directory
+        run: mkdir -p release_files
+
+      # Copy APK file to release_files directory
+      - name: Copy APK to Release Files Directory
+        run: cp build/app/outputs/flutter-apk/app-release.apk release_files/app-release.apk
+
+      - name: Copy AAB to Release Files Directory
+        run: cp build/app/outputs/bundle/release/app-release.aab release_files/app-release.aab
+
+      # Create GitHub Release
+      - name: Create Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          automatic_release_tag: v${{ github.run_number }}
+          release: false
+          title: Release ${{ github.run_number }}
+          files: |
+            release_files/app-release.apk
+            release_files/app-release.aab
+
+          body_path: release_body.txt
