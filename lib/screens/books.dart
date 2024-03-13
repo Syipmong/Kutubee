@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kutubee/screens/book_details.dart'; // Import the book details screen
 
 class AllBookView extends StatelessWidget {
-  const AllBookView({Key? key});
+  const AllBookView({super.key});
 
   @override
   Widget build(BuildContext context) {
