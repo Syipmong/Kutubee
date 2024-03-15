@@ -120,7 +120,7 @@ class SalomonBottomBar extends StatelessWidget {
                             ClipRect(
                               clipBehavior: Clip.antiAlias,
                               child: SizedBox(
-                                /// TODO: Constrain item height without a fixed value
+
                                 ///
                                 /// The Align property appears to make these full height, would be
                                 /// best to find a way to make it respond only to padding.
