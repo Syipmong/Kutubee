@@ -18,10 +18,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyBooksApp());
+  runApp(const MyBooksApp());
 }
 
 class MyBooksApp extends StatelessWidget {
+  const MyBooksApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
